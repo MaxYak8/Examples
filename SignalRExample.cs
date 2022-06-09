@@ -8,11 +8,10 @@ services.AddSignalR(hubOptions => {
 services.AddSingleton<SomeHub>();
 
 app.UseEndpoints(endpoints => {
-                endpoints.MapHub<SomeHub>("/somehub");
+                endpoints.MapHub<SomeHub>("/somehub").RequireAuthorization();
 }
 
 // from SomeHub
-[Authorize]
 public class SomeHub : Microsoft.AspNetCore.SignalR.Hub {
         public string ConnectionId() => Context.ConnectionId;
         public void Callback(SomeDto message) {
