@@ -96,7 +96,7 @@ public async Task<Team> FindTeamByNameAsync(string name, Guid regionId)
          nameWithoutDiacritic = nameWithoutDiacritic.Replace("ł", "l");
          nameWithoutDiacritic = nameWithoutDiacritic.Replace("đ", "d");
 
-         var teams = await FindAllByWhereAsync(q => EF.Functions.Like(q.Name, name)  &&
+         var teams = await FindAllByWhereAsync(q => EF.Functions.Like(q.Name, nameWithoutDiacritic)  &&
                                                     q.RegionId == regionId);
 
          if (teams == null || !teams.Any())
