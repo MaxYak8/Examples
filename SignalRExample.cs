@@ -12,7 +12,7 @@ app.UseEndpoints(endpoints => {
 }
 
 // from SomeHub
-
+[Authorize]
 public class SomeHub : Microsoft.AspNetCore.SignalR.Hub {
         public string ConnectionId() => Context.ConnectionId;
         public void Callback(SomeDto message) {
