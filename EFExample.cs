@@ -34,8 +34,6 @@ public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 protected override void OnModelCreating(ModelBuilder builder)
         {
             UpdateStructure(builder);
-            AddCountries(builder);
-            AddDefaultConstantProfile(builder);
         }
 		
 // PK, FK, indexes settings
