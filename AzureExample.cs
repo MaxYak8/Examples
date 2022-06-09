@@ -45,6 +45,7 @@ public class StartupHostedServiceHealthCheck : IHealthCheck {
         }
     }
 
+// StartupTaskCompleted is set to true in the end of Startup.cs
 
 // HealthCheckController
 public class HealthCheckController : IHealthCheck {
