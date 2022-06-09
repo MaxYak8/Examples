@@ -54,6 +54,7 @@ public class HealthCheckController : IHealthCheck {
         }
 
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default) {
+		// there is a request to database inside
             var result = await _mediator.Send(new GetAvailabilityDatabaseQuery());
 
             return result.IsAvailable
