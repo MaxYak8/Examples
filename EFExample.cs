@@ -63,7 +63,7 @@ public async Task<TEntity> InsertAsync(TEntity entity)
             return entity;
         }
 
-public void UpdateRange(List<TEntity> entities)
+public async Task UpdateRangeAsync(List<TEntity> entities)
         {
             foreach (var entityToUpdate in entities)
             {
@@ -75,7 +75,7 @@ public void UpdateRange(List<TEntity> entities)
                 context.Entry(entityToUpdate).State = EntityState.Modified;
                 context.ChangeTracker.AutoDetectChangesEnabled = false;
             }
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 		
 public async Task<List<TEntity>> FindNumberByWhereOrderedAscendingAsync(Expression<Func<TEntity, bool>> match, Expression<Func<TEntity, object>> orderBy, int number)
