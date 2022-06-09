@@ -48,7 +48,6 @@ private async Task RunSessions(long? minId = null, long? maxId = null)
                         }
                     }
 
-// add/insert/update existed games in database by EF 
                     await AddNewGamesInfo(gameExternalId, gameResponsesList, downloadSession.StartId, downloadSession.EndId);
 
                     mySemaphoreSlim.Release();
@@ -68,16 +67,11 @@ private async Task RunSessions(long? minId = null, long? maxId = null)
 
                 if (downloadSession != null)
                 {
-                    var timeBeforeGameCalculation = DateTime.UtcNow;
-                    downloadSession.ItemsToCalc += gameResponsesList.Count;
 
+// add/insert/update new or existed games in database by EF 
                     await gameService.AddNewInfoGameCollection(gameResponsesList, httpClientService, downloadSession);
 
-                    downloadSession.LastSavedId = gameExternalId;
-                    downloadSession.Percent = (downloadSession.LastSavedId - downloadSession.StartId) * 100 /
-                                              (downloadSession.EndId - downloadSession.StartId);
-
-                    downloadSession.AverageTimeSingleGame = (DateTime.UtcNow - downloadSession.LastUpdate).TotalSeconds / NumberOfResponseGames;
+                    downloadSession.LastSavedId = gameExternalId;                   
                     downloadSession.LastUpdate = DateTime.UtcNow;
 
                     await downloadSessionRepository.UpdateAsync(downloadSession);
